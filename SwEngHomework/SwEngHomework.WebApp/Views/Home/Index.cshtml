@@ -1,0 +1,37 @@
+﻿@using System.Globalization
+@{
+    ViewData["Title"] = "Home Page";
+    var controllerDate = Convert.ToDateTime(ViewBag.ControllerDateTime);
+    var currentDatetime = DateTime.UtcNow;
+    var currentDatetimeString = currentDatetime.ToString("yyyy-MM-ddTHH\\:mm\\:ss.fffffffzzz", CultureInfo.InvariantCulture);
+    var minuteValue = currentDatetime.Minute;
+    var loadTimeDifference = (currentDatetime - (DateTime)ViewBag.ControllerDateTime).Seconds;
+}
+
+<div class="text-center"">
+    <h3 class="display-4">Hello and Welcome!</h3>
+    <p>Welcome to the WebApp portion of the homework assignment.  For directions, please consult the README.md</p>
+    <hr /> 
+    
+    <div>
+        @if (loadTimeDifference <= 30)
+        {
+            <h4>
+                <i>@ViewBag.dateTimeInISO</i>
+            </h4>
+        }
+
+        @if (minuteValue % 2 == 0)
+        {
+            <a target="_blank" href="@Url.Action("EvenMinute", "Other")">
+                Even Minute
+            </a>
+        }
+
+    </div>
+
+    <hr />
+    <div>
+        Thank you for very much for taking the time to complete this part of the homework assignment!
+    </div>
+</div>
